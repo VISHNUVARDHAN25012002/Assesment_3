@@ -4,14 +4,61 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Scanner;
 
 public class Jdbc {
 	public static void main(String[] args) {
-	//insert();
-	//update();
-	//Modify();
-	//delete();
-	//droprecord();
+		System.out.println("Press the number to do operation");
+		System.out.println("1.insert");
+		System.out.println("2.update");
+		System.out.println("3.Modify");
+		System.out.println("4.delete");
+		System.out.println("5.Truncate table");
+		Scanner sc=new Scanner(System.in);
+		
+		while (true) {
+            System.out.print("Enter a number (or) 0 to exit): ");
+            System.out.println();
+            int option =sc.nextInt();
+
+
+            if (option == 0) {
+                break;
+            }
+		switch(option){
+		case 1:
+			insert();
+			System.out.println();
+			System.out.println("Inserted Sucssecfully");
+			break;
+		case 2:
+			update();
+			System.out.println();
+			System.out.println("Updated Sucssefully");
+			break;
+		case 3:
+			Modify();
+			System.out.println();
+			System.out.println("Modified Sucssefully");
+			break;
+		case 4:
+			delete();
+			System.out.println();
+			System.out.println("deleted Sucssefully");
+			break;
+		case 5:
+			droprecord();
+			System.out.println();
+			System.out.println("deleted records ");
+			break;
+		default:
+            System.out.println("You entered an invalid option");
+            break;
+			
+			
+		}
+		}
+		
 
 	}
 	public static void insert() {
@@ -45,7 +92,7 @@ public class Jdbc {
         String username="root";
         String password="9894";
        
-        String querry="alter table employee modify Email_Id varchar(50) not null";
+        String querry="alter table employee modify Email_Id varchar(30) not null";
         
         try {
 			Connection con =DriverManager.getConnection(url,username,password);
@@ -115,4 +162,24 @@ public class Jdbc {
 		}
 		
 	}
+	public static void insert2() {
+		String url="jdbc:mysql://localhost:3306/gl";
+		String username="root";
+		String password="9894";
+		String query="insert into employee values(6,'sruthi','sruthi.gl.com',1546549871)";
+		try {
+			Connection con =DriverManager.getConnection(url,username,password);
+			Statement st=con.createStatement();
+			int row=st.executeUpdate(query);
+			System.out.println("no of table affected "+row);
+			System.out.println("Connected");
+			} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+
 }
+
